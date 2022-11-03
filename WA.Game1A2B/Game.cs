@@ -1,4 +1,6 @@
-﻿namespace WA.Game1A2B
+﻿using System;
+
+namespace WA.Game1A2B
 {
 	public class Game
 	{
@@ -24,6 +26,37 @@
 		public Game(string answer)
 		{
 			Answer = answer;
+		}
+
+		/// <summary>
+		/// 判斷單次猜測結果
+		/// </summary>
+		/// <param name="input">玩家輸入值,長度4, 不重覆的數字,例如 5678</param>
+		/// <returns>傳回1A2B的結果</returns>
+		public string Play(string input)
+		{
+			int countA=0, countB=0; // 本次猜測,答對的A,B數量,總和不會超過4
+
+			for (int index = 0; index < input.Length; index++) // 一個個字比對正確性
+			{
+				// 若位置及值都對,countA加1
+				if (input[index] == Answer[index])
+				{
+					countA++;
+				}
+				else
+				{
+					// 若值正確但位置錯, countB加1
+					if (Answer.Contains(input[index].ToString()))
+					{
+						countB++;
+					}
+				}
+			}
+
+			if ((countA + countB) > 4) throw new Exception("countA,countB總和不可能大於4,程式有誤");
+
+			return $"{countA}A{countB}B";
 		}
 	}
 }
