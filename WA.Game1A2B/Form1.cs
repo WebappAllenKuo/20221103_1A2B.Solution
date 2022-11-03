@@ -24,7 +24,7 @@ namespace WA.Game1A2B
 
 		private void newgameButton_Click(object sender, EventArgs e)
 		{
-			game = new Game("1234");
+			game =Game.NewGame(); // new Game("1234");
 			answerLabel.Text = game.Answer; // 用label顯示答案,方便確認程式運作正確性
 		}
 

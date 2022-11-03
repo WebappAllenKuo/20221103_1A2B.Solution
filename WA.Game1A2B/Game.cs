@@ -16,11 +16,28 @@ namespace WA.Game1A2B
 		public static Game NewGame()
 		{
 			// 用亂數取得四個不重覆數字0~9
-			// todo 在此暫時手動指定
-			string answer = "1234";
+			string answer = GenerateRandomNumber();
 
 			// 建立 game
 			return new Game(answer);
+		}
+
+		/// <summary>
+		/// 用亂數取得四個不重覆數字0~9
+		/// </summary>
+		/// <returns></returns>
+		private static string GenerateRandomNumber()
+		{
+			string answer = string.Empty;
+			var random = new Random(Guid.NewGuid().GetHashCode());
+
+			while (answer.Length < 4)
+			{
+				string digit = random.Next(0, 10).ToString(); // "0" ~ "9"
+				if (!answer.Contains(digit)) answer += digit;
+			}
+
+			return answer;
 		}
 
 		public Game(string answer)
